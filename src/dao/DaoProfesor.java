@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 
 public class DaoProfesor {// 
@@ -19,21 +18,23 @@ public class DaoProfesor {//
             con = new conexion();
         }
         catch(Exception e){}
-        cargarA();
+        cargarP();
     }
     
-    private void cargarA()
+    private void cargarP()
     {
+        String per = "profesor";
         try{
-            ResultSet rs= con.consulta();
+            ResultSet rs= con.consulta(per);
             while(rs.next())
             {
-                //alumnos.add(new Alumno(rs.getString(1), rs.getString(2), rs.getInt(3)));
+                profes.add(new Profesor(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4)
+                , rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
             }
         }catch(Exception e){}
     }
     
-    public void guardarA (String n, String a, int d, String di, String l, String ln, String fn, String s){// para agregar alumnos
+    public void guardarP (String n, String a, int d, String di, String l, String ln, String fn, String s){// para agregar alumnos
         profes.add(new Profesor(n, a, d, di, l, ln, fn, s));
         
         String db = "INSERT INTO ";
@@ -47,15 +48,16 @@ public class DaoProfesor {//
         }catch(Exception e){}        
     }
     
-    public void borrarA(int dni, int ind) 
+    public void borrarP(int dni) 
     {
-            profes.remove(ind);
+        String per = "profesor";
+            profes.remove(dni);
             try{
-                con.eliminar(dni);
+                con.eliminar(dni, per);
             }catch(Exception e){}
     }
 
-    public List<Profesor> getAlumnos() {
+    public List<Profesor> getProfesor() {
         return profes;
     }
 }

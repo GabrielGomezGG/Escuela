@@ -21,6 +21,7 @@ import javax.swing.table.TableModel;
 public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     public JButton getjButton1() {

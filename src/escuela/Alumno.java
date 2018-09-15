@@ -62,6 +62,10 @@ public class Alumno {
         return dni;
     }
 
+    public String getSexo() {
+        return sexo;
+    }
+
     public List<Nota> getNotas() {
         return notas;
     }

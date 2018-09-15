@@ -26,15 +26,15 @@ public class conexion {
         //sta.execute("INSERT INTO alumnos (nombre, apellido, dni) Values ('"+nom+"', '"+ape+"', "+dn+" )");
     }
    
-    public ResultSet consulta() throws SQLException
+    public ResultSet consulta(String per) throws SQLException
     {
-        return res = sta.executeQuery("SELECT nombre, apellido, dni FROM alumnos");
+        return res = sta.executeQuery("SELECT * FROM "+per);
     }
     
     
-    public void eliminar(int dni) throws SQLException
+    public void eliminar(int dni, String per) throws SQLException
     {
-        sta.execute("DELETE FROM alumnos WHERE dni="+dni+"");
+        sta.execute("DELETE FROM "+per+" WHERE dni="+dni+"");
     }
    
 }

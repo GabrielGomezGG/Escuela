@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 
 public class DaoAlumnos {// 
@@ -24,11 +23,13 @@ public class DaoAlumnos {//
     
     private void cargarA()
     {
+        String per = "alumno";
         try{
-            ResultSet rs= con.consulta();
+            ResultSet rs= con.consulta(per);
             while(rs.next())
             {
-                //alumnos.add(new Alumno(rs.getString(1), rs.getString(2), rs.getInt(3)));
+                alumnos.add(new Alumno(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4)
+                , rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
             }
         }catch(Exception e){}
     }
@@ -47,11 +48,12 @@ public class DaoAlumnos {//
         }catch(Exception e){}        
     }
     
-    public void borrarA(int dni, int ind) 
+    public void borrarA(int dni, int posi) 
     {
-            alumnos.remove(ind);
+        String per = "alumno";
+            alumnos.remove(posi);
             try{
-                con.eliminar(dni);
+                con.eliminar(dni, per);
             }catch(Exception e){}
     }
 

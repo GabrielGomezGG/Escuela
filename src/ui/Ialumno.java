@@ -373,7 +373,7 @@ public class Ialumno extends javax.swing.JFrame {
         
         if(com.equals("Profesor")){
             DaoProfesor prof = new DaoProfesor();
-            prof.guardarA(nom, ape, dni, dir, loc, ln, fn, s);
+            prof.guardarP(nom, ape, dni, dir, loc, ln, fn, s);
             JOptionPane.showMessageDialog(null, "Profesor guardado");
         }
         
