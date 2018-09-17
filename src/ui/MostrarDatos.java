@@ -106,6 +106,20 @@ public class MostrarDatos extends javax.swing.JFrame {
         });
 
         jbBorrar.setText("Aceptar");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
+
+        tfBorrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfBorrarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBorrarKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Borrar por DNI");
@@ -178,8 +192,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
-        //DaoAlumnos a = new DaoAlumnos();
-        
         for(int f = 0; f < a.getAlumnos().size(); f++)
         {
             modelo.addRow(new Object[]{a.getAlumnos().get(f).getNombre(), a.getAlumnos().get(f).getApellido(),
@@ -193,9 +205,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         
         String box = (String)jcbDatos.getSelectedItem();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        //DaoAlumnos a = new DaoAlumnos();
-        //DaoProfesor p = new DaoProfesor();
         
         if(box.equals("Alumnos")){
             
@@ -321,6 +330,77 @@ public class MostrarDatos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_tfBuscarKeyTyped
+
+    private void tfBorrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyPressed
+        
+        int num = evt.getKeyCode();
+        
+        if(num == 10)
+        {
+            jbBorrarActionPerformed(null);
+        }
+        
+    }//GEN-LAST:event_tfBorrarKeyPressed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+
+        String box = (String)jcbDatos.getSelectedItem();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        String tf = ""+tfBorrar.getText();
+        int tbox = Integer.parseInt(tf);
+        boolean exis = false;
+        
+        //Condicion para Alumnos
+        if(box.equals("Alumnos")){
+            for(int f = 0; f < a.getAlumnos().size(); f++){
+                if(tbox == a.getAlumnos().get(f).getDni()){
+                        
+                    modelo.removeRow(f);
+                    a.borrarA(tbox, f);
+
+                    exis = true;
+                    break;
+                }
+            }
+                
+            if(exis == false){
+                JOptionPane.showMessageDialog(null, "NO EXISTE");
+            }
+
+        }
+        
+        //Condicion para Profesores
+        if(box.equals("Profesores")){
+            for(int f = 0; f < p.getProfesor().size(); f++){
+                if(tbox == p.getProfesor().get(f).getDni()){
+
+                    modelo.removeRow(f);
+                    p.borrarP(tbox, f);
+                    exis = true;
+                    break;
+                }
+            }
+            if(exis == false){
+                JOptionPane.showMessageDialog(null, "NO EXISTE");
+            }
+        }
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void tfBorrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyTyped
+        
+        char num = evt.getKeyChar();
+        
+        if(num < '0' || num > '9')
+        {
+          evt.consume();
+        }
+        
+        if(tfBorrar.getText().length() > 7)
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfBorrarKeyTyped
 
     /**
      * @param args the command line arguments
