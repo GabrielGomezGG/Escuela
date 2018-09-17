@@ -48,10 +48,10 @@ public class DaoAlumnos {//
         }catch(Exception e){}        
     }
     
-    public void borrarA(int dni, int posi) 
+    public void borrarA(int dni, int pos) 
     {
         String per = "alumno";
-            alumnos.remove(posi);
+            alumnos.remove(pos);
             try{
                 con.eliminar(dni, per);
             }catch(Exception e){}

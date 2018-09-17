@@ -244,7 +244,11 @@ public class MostrarDatos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
         String tf = ""+tfBuscar.getText();
-        int tbox = Integer.parseInt(tf);
+        int tbox = 0;
+        try{
+            tbox = Integer.parseInt(tf);
+        }catch(Exception e){}
+        
         boolean exis = false;
         
         if(!tfBuscar.getText().isEmpty()){
@@ -348,43 +352,62 @@ public class MostrarDatos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
         String tf = ""+tfBorrar.getText();
-        int tbox = Integer.parseInt(tf);
+        int tbox = 0;
+        try{
+            tbox = Integer.parseInt(tf);
+        }catch(Exception e){}
+        
         boolean exis = false;
         
-        //Condicion para Alumnos
-        if(box.equals("Alumnos")){
-            for(int f = 0; f < a.getAlumnos().size(); f++){
-                if(tbox == a.getAlumnos().get(f).getDni()){
-                        
-                    modelo.removeRow(f);
-                    a.borrarA(tbox, f);
+        if(!tfBorrar.getText().isEmpty()){
+            //Condicion para Alumnos
+            if(box.equals("Alumnos")){
+                for(int f = 0; f < a.getAlumnos().size(); f++){
+                    if(tbox == a.getAlumnos().get(f).getDni()){
 
-                    exis = true;
-                    break;
+                        int op = JOptionPane.showConfirmDialog(this,
+                            "¿Seguro que deseas borrar a "+ a.getAlumnos().get(f).getNombre()+" "+a.getAlumnos().get(f).getApellido(),
+                            "AAAAAAA", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
+
+                        if(JOptionPane.YES_OPTION == op){
+                            modelo.removeRow(f);
+                            a.borrarA(tbox, f);
+                            tfBorrar.setText("");
+                            exis = true;
+                            break;
+                        }else{
+                            exis = true;
+                            break;
+                        }
+
+                    }
+                }
+
+                if(exis == false){
+                    JOptionPane.showMessageDialog(null, "NO EXISTE");
+                }
+
+            }
+
+            //Condicion para Profesores
+            if(box.equals("Profesores")){
+                for(int f = 0; f < p.getProfesor().size(); f++){
+                    if(tbox == p.getProfesor().get(f).getDni()){
+
+                        modelo.removeRow(f);
+                        p.borrarP(tbox, f);
+                        exis = true;
+                        tfBorrar.setText("");
+                        break;
+                    }
+                }
+                if(exis == false){
+                    JOptionPane.showMessageDialog(null, "NO EXISTE");
                 }
             }
-                
-            if(exis == false){
-                JOptionPane.showMessageDialog(null, "NO EXISTE");
+            }else{
+                JOptionPane.showMessageDialog(null, "Campo Vacio");
             }
-
-        }
-        
-        //Condicion para Profesores
-        if(box.equals("Profesores")){
-            for(int f = 0; f < p.getProfesor().size(); f++){
-                if(tbox == p.getProfesor().get(f).getDni()){
-
-                    modelo.removeRow(f);
-                    p.borrarP(tbox, f);
-                    exis = true;
-                    break;
-                }
-            }
-            if(exis == false){
-                JOptionPane.showMessageDialog(null, "NO EXISTE");
-            }
-        }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void tfBorrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyTyped
