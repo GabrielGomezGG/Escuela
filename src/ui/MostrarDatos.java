@@ -3,6 +3,7 @@ package ui;
 
 import dao.DaoAlumnos;
 import dao.DaoProfesor;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MostrarDatos extends javax.swing.JFrame {
@@ -11,6 +12,9 @@ public class MostrarDatos extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    DaoAlumnos a = new DaoAlumnos();
+    DaoProfesor p = new DaoProfesor();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -19,20 +23,19 @@ public class MostrarDatos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tfBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcbDatos = new javax.swing.JComboBox<>();
         jbBuscar = new javax.swing.JButton();
         jbMostar = new javax.swing.JButton();
         jbBorrar = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        tfBorrar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Datos");
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(600, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -71,6 +74,15 @@ public class MostrarDatos extends javax.swing.JFrame {
             }
         });
 
+        tfBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfBuscarKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBuscarKeyTyped(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Buscar por DNI");
 
@@ -80,6 +92,11 @@ public class MostrarDatos extends javax.swing.JFrame {
         jcbDatos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alumnos", "Profesores", "Cursos" }));
 
         jbBuscar.setText("Aceptar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jbMostar.setText("Aceptar");
         jbMostar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +130,8 @@ public class MostrarDatos extends javax.swing.JFrame {
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField1)
+                                    .addComponent(tfBorrar)
+                                    .addComponent(tfBuscar)
                                     .addComponent(jcbDatos, 0, 161, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,12 +154,12 @@ public class MostrarDatos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBorrar)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
@@ -161,7 +178,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
-        DaoAlumnos a = new DaoAlumnos();
+        //DaoAlumnos a = new DaoAlumnos();
         
         for(int f = 0; f < a.getAlumnos().size(); f++)
         {
@@ -173,12 +190,12 @@ public class MostrarDatos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jbMostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostarActionPerformed
-        // TODO add your handling code here:
+        
         String box = (String)jcbDatos.getSelectedItem();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
-        DaoAlumnos a = new DaoAlumnos();
-        DaoProfesor p = new DaoProfesor();
+        //DaoAlumnos a = new DaoAlumnos();
+        //DaoProfesor p = new DaoProfesor();
         
         if(box.equals("Alumnos")){
             
@@ -211,6 +228,99 @@ public class MostrarDatos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jbMostarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        
+        String box = (String)jcbDatos.getSelectedItem();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        String tf = ""+tfBuscar.getText();
+        int tbox = Integer.parseInt(tf);
+        boolean exis = false;
+        
+        if(!tfBuscar.getText().isEmpty()){
+            if(box.equals("Alumnos")){
+
+                for(int f = 0; f < a.getAlumnos().size(); f++){
+                    if(tbox == a.getAlumnos().get(f).getDni()){
+
+                        int num = modelo.getRowCount();
+                        for(int m = 0; m < num; m++)
+                            modelo.removeRow(0);
+
+                        modelo.addRow(new Object[]{a.getAlumnos().get(f).getNombre(), a.getAlumnos().get(f).getApellido(),
+                        a.getAlumnos().get(f).getDni(), a.getAlumnos().get(f).getDireccion(),
+                        a.getAlumnos().get(f).getLocalidad(), a.getAlumnos().get(f).getLugar_nac(), 
+                        a.getAlumnos().get(f).getFecha_nac(), a.getAlumnos().get(f).getSexo()});
+
+                        exis = true;
+
+                    }
+                }
+                if(exis == false){
+                    JOptionPane.showMessageDialog(null, "NO EXISTE");
+                }
+
+            }
+
+            if(box.equals("Profesores")){
+
+                for(int f = 0; f < p.getProfesor().size(); f++){
+                    if(tbox == p.getProfesor().get(f).getDni()){
+
+                        int num = modelo.getRowCount();
+                        for(int m = 0; m < num; m++){
+                            modelo.removeRow(0);
+
+                        modelo.addRow(new Object[]{p.getProfesor().get(f).getNombre(), p.getProfesor().get(f).getApellido(),
+                        p.getProfesor().get(f).getDni(), p.getProfesor().get(f).getDireccion(),
+                        p.getProfesor().get(f).getLocalidad(), p.getProfesor().get(f).getLugar_nac(), 
+                        p.getProfesor().get(f).getFecha_nac(), p.getProfesor().get(f).getSexo()});
+
+                        exis = true;
+                        }
+                    }
+                }
+                if(exis == false){
+                    JOptionPane.showMessageDialog(null, "NO EXISTE");
+                }
+
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Campo Vacio");
+        }
+        
+                
+        
+        
+        
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void tfBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyPressed
+        
+        int num = evt.getKeyCode();
+        
+        if(num == 10)
+        {
+            jbBuscarActionPerformed(null);
+        }
+    }//GEN-LAST:event_tfBuscarKeyPressed
+
+    private void tfBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyTyped
+        
+        char num = evt.getKeyChar();
+        
+        if(num < '0' || num > '9')
+        {
+          evt.consume();
+        }
+        
+        if(tfBuscar.getText().length() > 7)
+        {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_tfBuscarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -254,11 +364,11 @@ public class MostrarDatos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbBorrar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbMostar;
     private javax.swing.JComboBox<String> jcbDatos;
+    private javax.swing.JTextField tfBorrar;
+    private javax.swing.JTextField tfBuscar;
     // End of variables declaration//GEN-END:variables
 }
