@@ -25,7 +25,6 @@ public class MostrarDatos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         tfBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -35,6 +34,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         jbBorrar = new javax.swing.JButton();
         tfBorrar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Datos");
@@ -73,16 +73,12 @@ public class MostrarDatos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("SALIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         tfBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfBuscarKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfBuscarKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfBuscarKeyTyped(evt);
@@ -135,43 +131,46 @@ public class MostrarDatos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Borrar por DNI");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcbDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbMostar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfBorrar)
-                                    .addComponent(tfBuscar)
-                                    .addComponent(jcbDatos, 0, 161, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbBuscar)
-                                    .addComponent(jbMostar)
-                                    .addComponent(jbBorrar))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(jbBorrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(55, 55, 55)
+                                        .addComponent(jbBuscar)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jcbDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -180,7 +179,8 @@ public class MostrarDatos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbBuscar))
+                    .addComponent(jbBuscar)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBorrar)
@@ -195,16 +195,8 @@ public class MostrarDatos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        for(int f = 0; f < a.getAlumnos().size(); f++)
-        {
-            modelo.addRow(new Object[]{a.getAlumnos().get(f).getNombre(), a.getAlumnos().get(f).getApellido(),
-                a.getAlumnos().get(f).getDni(), a.getAlumnos().get(f).getDireccion(),
-                a.getAlumnos().get(f).getLocalidad(), a.getAlumnos().get(f).getLugar_nac(), 
-                a.getAlumnos().get(f).getFecha_nac(), a.getAlumnos().get(f).getSexo()});
-        }
+        jbMostarActionPerformed(null);
+        jbMostar.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void jbMostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMostarActionPerformed
@@ -338,29 +330,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         {
             evt.consume();
         }
-        
-        String box = (String)jcbDatos.getSelectedItem();
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        //char num = evt.getKeyChar();
-        int lon = tfBuscar.getText().length();
-        int mod = modelo.getRowCount();
-        List<Integer> con = new ArrayList<>();
-        
-        if(box.equals("Alumnos")){
-            for(int f = 0; f < mod; f++){
-                String dniDAO = Integer.toString(a.getAlumnos().get(f).getDni());
-                if(num != dniDAO.charAt(lon)){
-                        //modelo.removeRow(f);
-                        con.add(f);
-                }
-                 
-            }
-            for(int f = 0; f < con.size(); f++){
-                modelo.removeRow(con.get(f));
-            }
-        }
-        
+        System.out.println(num);
     }//GEN-LAST:event_tfBuscarKeyTyped
 
     private void tfBorrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyPressed
@@ -444,13 +414,14 @@ public class MostrarDatos extends javax.swing.JFrame {
         
         if(num < '0' || num > '9')
         {
-          evt.consume();
+             evt.consume();
         }
         
         if(tfBorrar.getText().length() > 7)
         {
             evt.consume();
         }
+        
     }//GEN-LAST:event_tfBorrarKeyTyped
 
     private void jcbDatosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbDatosItemStateChanged
@@ -469,17 +440,47 @@ public class MostrarDatos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jcbDatosItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         
         int win = evt.getNewState();
         
         JOptionPane.showMessageDialog(null, win);
     }//GEN-LAST:event_formWindowClosing
+
+    private void tfBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyReleased
+        
+        String box = (String)jcbDatos.getSelectedItem();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        char num = evt.getKeyChar();
+        int lon = tfBuscar.getText().length();
+        List<Integer> con = new ArrayList<>();
+        
+        if(box.equals("Alumnos")){
+            for(int f = 0; f < a.getAlumnos().size(); f++){
+                
+                String dniDAO = Integer.toString(a.getAlumnos().get(f).getDni());
+                if(num == dniDAO.charAt(lon-1)){
+                        //modelo.removeRow(f);
+                        con.add(f);
+                }
+                 
+            }
+            for(int f = 0 ; f < modelo.getRowCount(); f++){
+                modelo.removeRow(f);
+            }
+            for(int i = 0; i < con.size(); i++){
+                int f = con.get(i);
+                modelo.addRow(new Object[]{p.getProfesor().get(f).getNombre(), p.getProfesor().get(f).getApellido(),
+                        p.getProfesor().get(f).getDni(), p.getProfesor().get(f).getDireccion(),
+                        p.getProfesor().get(f).getLocalidad(), p.getProfesor().get(f).getLugar_nac(), 
+                        p.getProfesor().get(f).getFecha_nac(), p.getProfesor().get(f).getSexo()});
+            }
+                
+                
+        }
+        
+    }//GEN-LAST:event_tfBuscarKeyReleased
 
     /**
      * @param args the command line arguments
@@ -517,7 +518,7 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
