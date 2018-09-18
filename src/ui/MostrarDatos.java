@@ -3,6 +3,8 @@ package ui;
 
 import dao.DaoAlumnos;
 import dao.DaoProfesor;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -336,6 +338,28 @@ public class MostrarDatos extends javax.swing.JFrame {
         if(tfBuscar.getText().length() > 7)
         {
             evt.consume();
+        }
+        
+        String box = (String)jcbDatos.getSelectedItem();
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        //char num = evt.getKeyChar();
+        int lon = tfBuscar.getText().length();
+        int mod = modelo.getRowCount();
+        List<Integer> con = new ArrayList<>();
+        
+        if(box.equals("Alumnos")){
+            for(int f = 0; f < mod; f++){
+                String dniDAO = Integer.toString(a.getAlumnos().get(f).getDni());
+                if(num != dniDAO.charAt(lon)){
+                        //modelo.removeRow(f);
+                        con.add(f);
+                }
+                 
+            }
+            for(int f = 0; f < con.size(); f++){
+                modelo.removeRow(con.get(f));
+            }
         }
         
     }//GEN-LAST:event_tfBuscarKeyTyped
