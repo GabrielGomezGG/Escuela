@@ -3,6 +3,7 @@ package ui;
 
 import dao.DaoAlumnos;
 import dao.DaoProfesor;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -37,8 +38,11 @@ public class MostrarDatos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Datos");
-        setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -189,11 +193,6 @@ public class MostrarDatos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
@@ -469,6 +468,18 @@ public class MostrarDatos extends javax.swing.JFrame {
             jbMostarActionPerformed(null);
         }
     }//GEN-LAST:event_jcbDatosItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+        int win = evt.getNewState();
+        
+        JOptionPane.showMessageDialog(null, win);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
