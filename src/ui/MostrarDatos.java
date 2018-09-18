@@ -457,27 +457,18 @@ public class MostrarDatos extends javax.swing.JFrame {
         List<Integer> con = new ArrayList<>();
         
         if(box.equals("Alumnos")){
-            for(int f = 0; f < a.getAlumnos().size(); f++){
+            for(int f = 0; f < modelo.getRowCount(); f++){
                 
-                String dniDAO = Integer.toString(a.getAlumnos().get(f).getDni());
-                if(num == dniDAO.charAt(lon-1)){
+                String dniDAO = ""+jTable1.getValueAt(f, 2);
+                if(num != dniDAO.charAt(lon-1)){
                         //modelo.removeRow(f);
                         con.add(f);
                 }
                  
             }
-            for(int f = 0 ; f < modelo.getRowCount(); f++){
-                modelo.removeRow(f);
+            for(int f = con.size()-1 ; f >= 0; f--){
+                modelo.removeRow(con.get(f));
             }
-            for(int i = 0; i < con.size(); i++){
-                int f = con.get(i);
-                modelo.addRow(new Object[]{p.getProfesor().get(f).getNombre(), p.getProfesor().get(f).getApellido(),
-                        p.getProfesor().get(f).getDni(), p.getProfesor().get(f).getDireccion(),
-                        p.getProfesor().get(f).getLocalidad(), p.getProfesor().get(f).getLugar_nac(), 
-                        p.getProfesor().get(f).getFecha_nac(), p.getProfesor().get(f).getSexo()});
-            }
-                
-                
         }
         
     }//GEN-LAST:event_tfBuscarKeyReleased
