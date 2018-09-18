@@ -90,6 +90,11 @@ public class MostrarDatos extends javax.swing.JFrame {
         jLabel2.setText("Mostar");
 
         jcbDatos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alumnos", "Profesores", "Cursos" }));
+        jcbDatos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbDatosItemStateChanged(evt);
+            }
+        });
 
         jbBuscar.setText("Aceptar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +316,7 @@ public class MostrarDatos extends javax.swing.JFrame {
 
     private void tfBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyPressed
         
-        int num = evt.getKeyCode();
+        char num = evt.getKeyChar();
         
         if(num == 10)
         {
@@ -424,6 +429,22 @@ public class MostrarDatos extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_tfBorrarKeyTyped
+
+    private void jcbDatosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbDatosItemStateChanged
+        
+        String opc = "";
+        try{
+            opc = (String)evt.getItem();
+        }catch(Exception e){}
+        
+        
+        if(opc.equals("Alumnos")){
+            jbMostarActionPerformed(null);
+        }
+        if(opc.equals("Profesores")){
+            jbMostarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jcbDatosItemStateChanged
 
     /**
      * @param args the command line arguments
