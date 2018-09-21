@@ -60,4 +60,19 @@ public class DaoProfesor {//
     public List<Profesor> getProfesor() {
         return profes;
     }
+    
+    public List<Profesor> buscar(String campo, String dato){
+        List<Profesor> bus = new ArrayList();
+        String per = "profesor";
+        
+        try{
+            ResultSet rs= con.busqueda(per, campo, dato);
+            while(rs.next())
+            {
+                bus.add(new Profesor(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4)
+                , rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+            }
+        }catch(Exception e){}
+        return bus;
+    }
 }

@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DaoAlumnos {// 
+public class DaoAlumnos {
    private List<Alumno>alumnos;
    private conexion con;
   
-    public DaoAlumnos (){// constru
+    public DaoAlumnos (){
         alumnos= new ArrayList();
         try{
             con = new conexion();
@@ -59,5 +59,20 @@ public class DaoAlumnos {//
 
     public List<Alumno> getAlumnos() {
         return alumnos;
+    }
+    
+    public List<Alumno> buscar(String campo, String dato){
+        List<Alumno> bus = new ArrayList();
+        String per = "alumno";
+        
+        try{
+            ResultSet rs= con.busqueda(per, campo, dato);
+            while(rs.next())
+            {
+                bus.add(new Alumno(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4)
+                , rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8)));
+            }
+        }catch(Exception e){}
+        return bus;
     }
 }
