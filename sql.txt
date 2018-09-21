@@ -1,0 +1,9 @@
+1: select apellido, nombre, dni from profesor
+2: select * from curso
+3: select * from alumno where nombre = 'Carlos'
+4: select * from profesor where nombre 'Daniela' and fecha_nac = '28/07/1960'
+5: select * from alumno where dni = '2%'
+6: SELECT sexo, COUNT(*)  from alumno GROUP BY sexo
+7: select materia from ensenia where profesor = '65444'
+8: select localidad from alumno GROUP by localidad HAVING COUNT(*) >= 5 
+9: 
