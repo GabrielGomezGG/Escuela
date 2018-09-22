@@ -36,5 +36,9 @@ public class conexion {
     {
         sta.execute("DELETE FROM "+per+" WHERE dni="+dni+"");
     }
+    
+    public ResultSet busqueda(String per, String campo, String dato) throws SQLException{
+        return res = sta.executeQuery("SELECT * FROM "+per+" WHERE "+campo+" LIKE '"+dato+"%'");
+    }
    
 }

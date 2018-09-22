@@ -3,6 +3,8 @@ package ui;
 
 import dao.DaoAlumnos;
 import dao.DaoProfesor;
+import escuela.Alumno;
+import escuela.Profesor;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         jbBorrar = new javax.swing.JButton();
         tfBorrar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbBuscar = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Datos");
@@ -74,9 +76,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         tfBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfBuscarKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tfBuscarKeyReleased(evt);
             }
@@ -86,7 +85,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Buscar por DNI");
+        jLabel1.setText("Buscar por");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Mostar");
@@ -131,7 +130,8 @@ public class MostrarDatos extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Borrar por DNI");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Apellido", "DNI", "Direccion ", "Localidad", "Lugar de nacimiento", "Fecha de nacimiento" }));
+        jcbBuscar.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +154,7 @@ public class MostrarDatos extends javax.swing.JFrame {
                                 .addComponent(jbMostar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbBuscar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(tfBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -180,7 +180,7 @@ public class MostrarDatos extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbBorrar)
@@ -307,30 +307,17 @@ public class MostrarDatos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
-    private void tfBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyPressed
-        
-        char num = evt.getKeyChar();
-        
-        if(num == 10)
-        {
-            jbBuscarActionPerformed(null);
-        }
-    }//GEN-LAST:event_tfBuscarKeyPressed
-
     private void tfBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyTyped
         
         char num = evt.getKeyChar();
         
-        if(num < '0' || num > '9')
-        {
-          evt.consume();
+        if(jcbBuscar.getSelectedIndex() == 2){
+            if(num < '0' || num > '9')
+            {
+              evt.consume();
+            }
         }
         
-        if(tfBuscar.getText().length() > 7)
-        {
-            evt.consume();
-        }
-        System.out.println(num);
     }//GEN-LAST:event_tfBuscarKeyTyped
 
     private void tfBorrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyPressed
@@ -368,7 +355,7 @@ public class MostrarDatos extends javax.swing.JFrame {
                             "AAAAAAA", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
 
                         if(JOptionPane.YES_OPTION == op){
-                            modelo.removeRow(f);
+                            //modelo.removeRow(f);
                             a.borrarA(tbox, f);
                             tfBorrar.setText("");
                             exis = true;
@@ -449,28 +436,34 @@ public class MostrarDatos extends javax.swing.JFrame {
 
     private void tfBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarKeyReleased
         
-        String box = (String)jcbDatos.getSelectedItem();
+        //String box = (String)jcbBuscar.getSelectedItem();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        char num = evt.getKeyChar();
-        int lon = tfBuscar.getText().length();
-        List<Integer> con = new ArrayList<>();
-        
-        if(box.equals("Alumnos")){
-            for(int f = 0; f < modelo.getRowCount(); f++){
-                
-                String dniDAO = ""+jTable1.getValueAt(f, 2);
-                if(num != dniDAO.charAt(lon-1)){
-                        //modelo.removeRow(f);
-                        con.add(f);
-                }
-                 
-            }
-            for(int f = con.size()-1 ; f >= 0; f--){
-                modelo.removeRow(con.get(f));
-            }
+
+       
+        String box = "";
+        switch(jcbBuscar.getSelectedIndex()){
+            case 0: box = "nombre";break;
+            case 1: box = "apellido";break;
+            case 2: box = "dni"; break;
+            case 3: box = "direccion"; break;
+            case 4: box = "localidad"; break;
+            case 5: box = "lugar_nac"; break;
+            case 6: box = "fecha_nac"; break;
+
         }
         
+        List<Alumno>busqueda = a.buscar(box, tfBuscar.getText());
+        
+        
+        for(int f = modelo.getRowCount()-1; f >= 0; f--)
+            modelo.removeRow(f);
+        
+        for(int f = 0; f < busqueda.size(); f++){
+            modelo.addRow(new Object[]{busqueda.get(f).getNombre(), busqueda.get(f).getApellido(),
+                        busqueda.get(f).getDni(), busqueda.get(f).getDireccion(),
+                        busqueda.get(f).getLocalidad(), busqueda.get(f).getLugar_nac(), 
+                        busqueda.get(f).getFecha_nac(), busqueda.get(f).getSexo()});
+        }
     }//GEN-LAST:event_tfBuscarKeyReleased
 
     /**
@@ -509,7 +502,6 @@ public class MostrarDatos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -518,6 +510,7 @@ public class MostrarDatos extends javax.swing.JFrame {
     private javax.swing.JButton jbBorrar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbMostar;
+    private javax.swing.JComboBox<String> jcbBuscar;
     private javax.swing.JComboBox<String> jcbDatos;
     private javax.swing.JTextField tfBorrar;
     private javax.swing.JTextField tfBuscar;
