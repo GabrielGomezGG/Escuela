@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class DaoProfesor  { 
-   private List<Profesor>profes;
+   private List<PersonaDao>profes;
    private conexion con;
    //private ResultSet rs;
   
@@ -60,7 +60,7 @@ public class DaoProfesor  {
             }catch(Exception e){}
     }
 
-    public List<Profesor> getProfesor() {
+    public List<PersonaDao> getProfesor() {
         return profes;
     }
     

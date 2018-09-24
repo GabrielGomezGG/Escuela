@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class DaoAlumnos {
-   private List<Alumno>alumnos;
+   private List<PersonaDao>alumnos;
    private conexion con;
   
     public DaoAlumnos (){
@@ -58,7 +58,7 @@ public class DaoAlumnos {
             }catch(Exception e){}
     }
 
-    public List<Alumno> getAlumnos() {
+    public List<PersonaDao> getAlumnos() {
         return alumnos;
     }
     

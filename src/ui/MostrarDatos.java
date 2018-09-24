@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class MostrarDatos extends javax.swing.JFrame {
@@ -17,6 +18,20 @@ public class MostrarDatos extends javax.swing.JFrame {
     public MostrarDatos() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public void borrarTabla(DefaultTableModel mo){
+        int n = mo.getRowCount();
+        for(int f = 0; f < n; f++)
+            mo.removeRow(0);
+    }
+    public void cargarTabla(List<PersonaDao> busqueda, DefaultTableModel modelo){
+        for(int f = 0; f < busqueda.size(); f++){
+            modelo.addRow(new Object[]{busqueda.get(f).getNombre(), busqueda.get(f).getApellido(),
+                busqueda.get(f).getDni(), busqueda.get(f).getDireccion(),
+                busqueda.get(f).getLocalidad(), busqueda.get(f).getLugar_nac(), 
+                busqueda.get(f).getFecha_nac(), busqueda.get(f).getSexo()});
+        }
     }
     
     DaoAlumnos a = new DaoAlumnos();
@@ -206,33 +221,30 @@ public class MostrarDatos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         
         if(box.equals("Alumnos")){
-            
-            int num = modelo.getRowCount();
-            for(int m = 0; m < num; m++){
-                modelo.removeRow(0);
-            }
-           
-            for(int f = 0; f < a.getAlumnos().size(); f++){
-                modelo.addRow(new Object[]{a.getAlumnos().get(f).getNombre(), a.getAlumnos().get(f).getApellido(),
-                    a.getAlumnos().get(f).getDni(), a.getAlumnos().get(f).getDireccion(),
-                    a.getAlumnos().get(f).getLocalidad(), a.getAlumnos().get(f).getLugar_nac(), 
-                    a.getAlumnos().get(f).getFecha_nac(), a.getAlumnos().get(f).getSexo()});
-            }
+            borrarTabla(modelo);
+            cargarTabla(a.getAlumnos(), modelo);
+//            for(int f = 0; f < a.getAlumnos().size(); f++){
+//                modelo.addRow(new Object[]{a.getAlumnos().get(f).getNombre(), a.getAlumnos().get(f).getApellido(),
+//                    a.getAlumnos().get(f).getDni(), a.getAlumnos().get(f).getDireccion(),
+//                    a.getAlumnos().get(f).getLocalidad(), a.getAlumnos().get(f).getLugar_nac(), 
+//                    a.getAlumnos().get(f).getFecha_nac(), a.getAlumnos().get(f).getSexo()});
+//            }
         }
         
         if(box.equals("Profesores")){
-            
-            int num = modelo.getRowCount();
-            for(int m = 0; m < num; m++){
-                modelo.removeRow(0);
-            }
-            
-            for(int f = 0; f < p.getProfesor().size(); f++){
-                modelo.addRow(new Object[]{p.getProfesor().get(f).getNombre(), p.getProfesor().get(f).getApellido(),
-                    p.getProfesor().get(f).getDni(), p.getProfesor().get(f).getDireccion(),
-                    p.getProfesor().get(f).getLocalidad(), p.getProfesor().get(f).getLugar_nac(), 
-                    p.getProfesor().get(f).getFecha_nac(), p.getProfesor().get(f).getSexo()});
-            }
+            borrarTabla(modelo);
+            cargarTabla(p.getProfesor(), modelo);
+//            int num = modelo.getRowCount();
+//            for(int m = 0; m < num; m++){
+//                modelo.removeRow(0);
+//            }
+//            
+//            for(int f = 0; f < p.getProfesor().size(); f++){
+//                modelo.addRow(new Object[]{p.getProfesor().get(f).getNombre(), p.getProfesor().get(f).getApellido(),
+//                    p.getProfesor().get(f).getDni(), p.getProfesor().get(f).getDireccion(),
+//                    p.getProfesor().get(f).getLocalidad(), p.getProfesor().get(f).getLugar_nac(), 
+//                    p.getProfesor().get(f).getFecha_nac(), p.getProfesor().get(f).getSexo()});
+//            }
         }
         
     }//GEN-LAST:event_jbMostarActionPerformed
@@ -460,16 +472,21 @@ public class MostrarDatos extends javax.swing.JFrame {
         if(jcbDatos.getSelectedIndex()==1){
             busqueda = p.buscar(box, tfBuscar.getText());
         }
+        /*
+        int n = modelo.getRowCount();
+        for(int f =0; f < n; f++)
+            modelo.removeRow(0);
+        */
         
-        for(int f = modelo.getRowCount()-1; f >= 0; f--)
-            modelo.removeRow(f);
+        borrarTabla(modelo);
+        cargarTabla(busqueda, modelo);
         
-        for(int f = 0; f < busqueda.size(); f++){
-            modelo.addRow(new Object[]{busqueda.get(f).getNombre(), busqueda.get(f).getApellido(),
-                        busqueda.get(f).getDni(), busqueda.get(f).getDireccion(),
-                        busqueda.get(f).getLocalidad(), busqueda.get(f).getLugar_nac(), 
-                        busqueda.get(f).getFecha_nac(), busqueda.get(f).getSexo()});
-        }
+//        for(int f = 0; f < busqueda.size(); f++){
+//            modelo.addRow(new Object[]{busqueda.get(f).getNombre(), busqueda.get(f).getApellido(),
+//                        busqueda.get(f).getDni(), busqueda.get(f).getDireccion(),
+//                        busqueda.get(f).getLocalidad(), busqueda.get(f).getLugar_nac(), 
+//                        busqueda.get(f).getFecha_nac(), busqueda.get(f).getSexo()});
+//        }
     }//GEN-LAST:event_tfBuscarKeyReleased
 
     /**
