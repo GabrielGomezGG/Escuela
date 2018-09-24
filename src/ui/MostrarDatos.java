@@ -4,6 +4,7 @@ package ui;
 import dao.DaoAlumnos;
 import dao.DaoProfesor;
 import escuela.Alumno;
+import escuela.PersonaDao;
 import escuela.Profesor;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -439,6 +440,7 @@ public class MostrarDatos extends javax.swing.JFrame {
         //String box = (String)jcbBuscar.getSelectedItem();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
        
+        
         String box = "";
         switch(jcbBuscar.getSelectedIndex()){
             case 0: box = "nombre";break;
@@ -450,8 +452,14 @@ public class MostrarDatos extends javax.swing.JFrame {
             case 6: box = "fecha_nac"; break;
         }
         
-        List<Alumno>busqueda = a.buscar(box, tfBuscar.getText());
-        
+        List<PersonaDao> busqueda = new ArrayList();
+        if(jcbDatos.getSelectedIndex()==0){
+            busqueda = a.buscar(box, tfBuscar.getText());
+        }
+         
+        if(jcbDatos.getSelectedIndex()==1){
+            busqueda = p.buscar(box, tfBuscar.getText());
+        }
         
         for(int f = modelo.getRowCount()-1; f >= 0; f--)
             modelo.removeRow(f);

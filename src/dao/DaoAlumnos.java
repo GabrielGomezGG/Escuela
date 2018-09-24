@@ -2,6 +2,7 @@
 package dao;
 
 import escuela.Alumno;
+import escuela.PersonaDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -61,8 +62,8 @@ public class DaoAlumnos {
         return alumnos;
     }
     
-    public List<Alumno> buscar(String campo, String dato){
-        List<Alumno> bus = new ArrayList();
+    public List<PersonaDao> buscar(String campo, String dato){
+        List<PersonaDao> bus = new ArrayList();
         String per = "alumno";
         
         try{

@@ -1,6 +1,7 @@
 
 package dao;
 
+import escuela.PersonaDao;
 import escuela.Profesor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DaoProfesor {// 
+public class DaoProfesor  { 
    private List<Profesor>profes;
    private conexion con;
+   //private ResultSet rs;
   
-    public DaoProfesor (){// constru
+    public DaoProfesor (){
         profes= new ArrayList();
         try{
             con = new conexion();
@@ -26,6 +28,7 @@ public class DaoProfesor {//
         String per = "profesor";
         try{
             ResultSet rs= con.consulta(per);
+            //con.consulta(per);
             while(rs.next())
             {
                 profes.add(new Profesor(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4)
@@ -61,8 +64,8 @@ public class DaoProfesor {//
         return profes;
     }
     
-    public List<Profesor> buscar(String campo, String dato){
-        List<Profesor> bus = new ArrayList();
+    public List<PersonaDao> buscar(String campo, String dato){
+        List<PersonaDao> bus = new ArrayList();
         String per = "profesor";
         
         try{
