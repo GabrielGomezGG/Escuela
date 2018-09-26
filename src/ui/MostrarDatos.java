@@ -44,9 +44,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jcbDatos = new javax.swing.JComboBox<>();
-        jbBorrar = new javax.swing.JButton();
-        tfBorrar = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jcbBuscar = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,25 +102,6 @@ public class MostrarDatos extends javax.swing.JFrame {
             }
         });
 
-        jbBorrar.setText("Aceptar");
-        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBorrarActionPerformed(evt);
-            }
-        });
-
-        tfBorrar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfBorrarKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfBorrarKeyTyped(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Borrar por DNI");
-
         jcbBuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Apellido", "DNI", "Direccion ", "Localidad", "Lugar de nacimiento", "Fecha de nacimiento" }));
         jcbBuscar.setToolTipText("");
 
@@ -138,25 +116,17 @@ public class MostrarDatos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel2))
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jcbDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jcbBuscar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jcbBuscar, 0, 161, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbBorrar, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(126, 126, 126)))))))
+                                .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(126, 126, 126)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -171,12 +141,7 @@ public class MostrarDatos extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(tfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBorrar)
-                    .addComponent(tfBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -196,98 +161,6 @@ public class MostrarDatos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_tfBuscarKeyTyped
-
-    private void tfBorrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyPressed
-        
-        int num = evt.getKeyCode();
-        
-        if(num == 10)
-        {
-            jbBorrarActionPerformed(null);
-        }
-        
-    }//GEN-LAST:event_tfBorrarKeyPressed
-
-    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-
-        String box = (String)jcbDatos.getSelectedItem();
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        
-        String tf = ""+tfBorrar.getText();
-        int tbox = 0;
-        try{
-            tbox = Integer.parseInt(tf);
-        }catch(Exception e){}
-        
-        boolean exis = false;
-        
-        if(!tfBorrar.getText().isEmpty()){
-            //Condicion para Alumnos
-            if(box.equals("Alumnos")){
-                for(int f = 0; f < a.getPersona().size(); f++){
-                    if(tbox == a.getPersona().get(f).getDni()){
-
-                        int op = JOptionPane.showConfirmDialog(this,
-                            "¿Seguro que deseas borrar a "+ a.getPersona().get(f).getNombre()+" "+a.getPersona().get(f).getApellido(),
-                            "AAAAAAA", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
-
-                        if(JOptionPane.YES_OPTION == op){
-                            //modelo.removeRow(f);
-                            a.borrarDatos(tbox, f);
-                            tfBorrar.setText("");
-                            
-                            exis = true;
-                            break;
-                        }else{
-                            exis = true;
-                            break;
-                        }
-
-                    }
-                }
-
-                if(exis == false){
-                    JOptionPane.showMessageDialog(null, "NO EXISTE");
-                }
-
-            }
-
-            //Condicion para Profesores
-            if(box.equals("Profesores")){
-                for(int f = 0; f < p.getPersona().size(); f++){
-                    if(tbox == p.getPersona().get(f).getDni()){
-
-                        modelo.removeRow(f);
-                        p.borrarDatos(tbox, f);
-                        exis = true;
-                        tfBorrar.setText("");
-                        break;
-                    }
-                }
-                if(exis == false){
-                    JOptionPane.showMessageDialog(null, "NO EXISTE");
-                }
-            }
-            }else{
-                JOptionPane.showMessageDialog(null, "Campo Vacio");
-            }
-    }//GEN-LAST:event_jbBorrarActionPerformed
-
-    private void tfBorrarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBorrarKeyTyped
-        
-        char num = evt.getKeyChar();
-        
-        if(num < '0' || num > '9')
-        {
-             evt.consume();
-        }
-        
-        if(tfBorrar.getText().length() > 7)
-        {
-            evt.consume();
-        }
-        
-    }//GEN-LAST:event_tfBorrarKeyTyped
 
     private void jcbDatosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbDatosItemStateChanged
         
@@ -348,8 +221,8 @@ public class MostrarDatos extends javax.swing.JFrame {
                         p.getPersona().get(f).getDni();
         }
         
-        int op = JOptionPane.showOptionDialog(this, "Que desea hacer con"+ datos,"Opciones", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Modificar", "Borrar"}, null);
+        int op = JOptionPane.showOptionDialog(this, "Que desea hacer con "+ datos,"Opciones", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Modificar datos", "Borrar"}, null);
         
         //modificar
         if(op == 0){
@@ -411,13 +284,10 @@ public class MostrarDatos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbBorrar;
     private javax.swing.JComboBox<String> jcbBuscar;
     private javax.swing.JComboBox<String> jcbDatos;
-    private javax.swing.JTextField tfBorrar;
     private javax.swing.JTextField tfBuscar;
     // End of variables declaration//GEN-END:variables
 }

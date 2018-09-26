@@ -124,7 +124,7 @@ public class Ialumno extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("P R O G R A M A ");
         setBackground(new java.awt.Color(255, 204, 102));
-        setUndecorated(true);
+        setResizable(false);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Datos Aleatorios");
