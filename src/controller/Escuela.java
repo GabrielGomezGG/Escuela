@@ -4,10 +4,13 @@ package controller;
 import java.util.ArrayList;
 import java.util.List;
 import ui.Ialumno;
-import ui.Menu;
 
 public class Escuela {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 //        List<Alumno> a = new ArrayList<>();
 //        

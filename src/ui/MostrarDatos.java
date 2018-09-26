@@ -332,8 +332,10 @@ public class MostrarDatos extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
             
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        
+        //nº de posicion del row del click
         int f = jTable1.getSelectedRow();
-        String datos;
+        String datos="";
         
         switch(jcbDatos.getSelectedIndex()){
             case 0: 
@@ -342,11 +344,11 @@ public class MostrarDatos extends javax.swing.JFrame {
                         a.getPersona().get(f).getDni(); break;
             case 1:
                 datos = p.getPersona().get(f).getNombre() + " " +
-                        p.getPersona().get(f).getApellido() + " " +
+                        p.getPersona().get(f).getApellido() + ", " +
                         p.getPersona().get(f).getDni();
         }
         
-        int op = JOptionPane.showOptionDialog(this, "Que desea hacer con","Opciones", JOptionPane.DEFAULT_OPTION,
+        int op = JOptionPane.showOptionDialog(this, "Que desea hacer con"+ datos,"Opciones", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Modificar", "Borrar"}, null);
         
         //modificar
@@ -356,12 +358,17 @@ public class MostrarDatos extends javax.swing.JFrame {
         //borrar
         if(op == 1){
             int opc = JOptionPane.showConfirmDialog(this,
-                "¿Seguro que deseas borrar a "+ a.getPersona().get(f).getNombre()+" "+a.getPersona().get(f).getApellido(),
+                "¿Seguro que deseas borrar estos datos?",
                 "Borrar", JOptionPane.YES_OPTION, JOptionPane.NO_OPTION);
 
             if(JOptionPane.YES_OPTION == opc){
                 modelo.removeRow(f);
-                a.borrarDatos(a.getPersona().get(f).getDni(), f);
+                switch(jcbDatos.getSelectedIndex()){
+                    case 0: a.borrarDatos(a.getPersona().get(f).getDni(), f); break;
+                    case 1: p.borrarDatos(p.getPersona().get(f).getDni(), f);
+                }
+                
+                JOptionPane.showMessageDialog(this, "Se borro con exito");
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked

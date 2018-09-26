@@ -394,12 +394,7 @@ public class Ialumno extends javax.swing.JFrame {
             DaoProfesor prof = new DaoProfesor();
             prof.guardarDatos(nom, ape, dni, dir, loc, ln, fn, s);
             JOptionPane.showMessageDialog(null, "Profesor guardado");
-        }
-        
-        
-        //}
-        //else
-        //   JOptionPane.showMessageDialog(this, "Campos vacios");        
+        }      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
