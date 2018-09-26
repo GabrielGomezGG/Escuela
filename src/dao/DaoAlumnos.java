@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DaoAlumnos {
+public class DaoAlumnos implements DaoPersona{
    private List<PersonaDao>alumnos;
    private conexion con;
   
@@ -19,10 +19,10 @@ public class DaoAlumnos {
             con = new conexion();
         }
         catch(Exception e){}
-        cargarA();
+        cargarDatos();
     }
     
-    private void cargarA()
+    private void cargarDatos()
     {
         String per = "alumno";
         try{
@@ -35,7 +35,7 @@ public class DaoAlumnos {
         }catch(Exception e){}
     }
     
-    public void guardarA (String n, String a, int d, String di, String l, String ln, String fn, String s){// para agregar alumnos
+    public void guardarDatos (String n, String a, int d, String di, String l, String ln, String fn, String s){// para agregar alumnos
         alumnos.add(new Alumno(n, a, d, di, l, ln, fn, s));
         
         String db = "INSERT INTO ";
@@ -49,7 +49,7 @@ public class DaoAlumnos {
         }catch(Exception e){}        
     }
     
-    public void borrarA(int dni, int pos) 
+    public void borrarDatos(int dni, int pos) 
     {
         String per = "alumno";
             alumnos.remove(pos);
@@ -58,11 +58,11 @@ public class DaoAlumnos {
             }catch(Exception e){}
     }
 
-    public List<PersonaDao> getAlumnos() {
+    public List<PersonaDao> getPersona() {
         return alumnos;
     }
     
-    public List<PersonaDao> buscar(String campo, String dato){
+    public List<PersonaDao> buscarDatos(String campo, String dato){
         List<PersonaDao> bus = new ArrayList();
         String per = "alumno";
         
@@ -76,4 +76,5 @@ public class DaoAlumnos {
         }catch(Exception e){}
         return bus;
     }
+
 }

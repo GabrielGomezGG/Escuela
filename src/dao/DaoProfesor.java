@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DaoProfesor  { 
+public class DaoProfesor implements DaoPersona{ 
    private List<PersonaDao>profes;
    private conexion con;
    //private ResultSet rs;
@@ -20,10 +20,10 @@ public class DaoProfesor  {
             con = new conexion();
         }
         catch(Exception e){}
-        cargarP();
+        cargarDatos();
     }
     
-    private void cargarP()
+    private void cargarDatos()
     {
         String per = "profesor";
         try{
@@ -37,7 +37,7 @@ public class DaoProfesor  {
         }catch(Exception e){}
     }
     
-    public void guardarP (String n, String a, int d, String di, String l, String ln, String fn, String s){// para agregar alumnos
+    public void guardarDatos (String n, String a, int d, String di, String l, String ln, String fn, String s){// para agregar alumnos
         profes.add(new Profesor(n, a, d, di, l, ln, fn, s));
         
         String db = "INSERT INTO ";
@@ -51,7 +51,7 @@ public class DaoProfesor  {
         }catch(Exception e){}        
     }
     
-    public void borrarP(int dni, int pos) 
+    public void borrarDatos(int dni, int pos) 
     {
         String per = "profesor";
             profes.remove(pos);
@@ -60,11 +60,11 @@ public class DaoProfesor  {
             }catch(Exception e){}
     }
 
-    public List<PersonaDao> getProfesor() {
+    public List<PersonaDao> getPersona() {
         return profes;
     }
     
-    public List<PersonaDao> buscar(String campo, String dato){
+    public List<PersonaDao> buscarDatos(String campo, String dato){
         List<PersonaDao> bus = new ArrayList();
         String per = "profesor";
         

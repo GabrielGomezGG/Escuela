@@ -1,19 +1,18 @@
 
 package dao;
 
-import java.sql.ResultSet;
+import escuela.PersonaDao;
+import java.util.List;
 
-public abstract class DaoPersona implements DaoInterface{
+public interface DaoPersona {
     
-    private DaoInterface inter;
+    // void cargarDatos();
     
-    public DaoPersona(DaoInterface dao){
-        
-        inter = dao;
-    }
-
+    public void guardarDatos(String n, String a, int d, String di, String l, String ln, String fn, String s);
     
-    public DaoInterface getDao(){
-        return inter;
-    }
+    public void borrarDatos(int dni, int pos);
+    
+    public List<PersonaDao> getPersona();
+    
+    public List buscarDatos(String campo, String dato);
 }

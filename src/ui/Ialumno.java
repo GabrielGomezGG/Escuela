@@ -386,13 +386,13 @@ public class Ialumno extends javax.swing.JFrame {
         com = (String)jComboBox2.getSelectedItem();
         if(com.equals("Alumno")){
             DaoAlumnos alum = new DaoAlumnos();
-            alum.guardarA(nom, ape, dni, dir, loc, ln, fn, s);
+            alum.guardarDatos(nom, ape, dni, dir, loc, ln, fn, s);
             JOptionPane.showMessageDialog(null, "Alumno guardado");
         }
         
         if(com.equals("Profesor")){
             DaoProfesor prof = new DaoProfesor();
-            prof.guardarP(nom, ape, dni, dir, loc, ln, fn, s);
+            prof.guardarDatos(nom, ape, dni, dir, loc, ln, fn, s);
             JOptionPane.showMessageDialog(null, "Profesor guardado");
         }
         
